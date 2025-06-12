@@ -13,7 +13,7 @@
 
     Post /user - handle new user creation
 
-    Pathch /user - Update the user
+    Patch/user - Update the user
 
 <br/>
 
