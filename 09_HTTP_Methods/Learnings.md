@@ -4,7 +4,7 @@
 
     POST -> When you want to send and mutate some data in server.
 
-    PUT  
-    PATCH
-    DELETE
+    PUT  ->  if i want to upload any file, photo like this thing
+    PATCH -> if i have to change an wxisting data 
+    DELETE - 
 ```
