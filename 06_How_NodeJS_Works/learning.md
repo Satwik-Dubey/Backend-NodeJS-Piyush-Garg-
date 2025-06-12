@@ -26,6 +26,9 @@ Thread pool is a pool of threads . Threads act a worker which work for you . It 
 
 ![non-blocking operation in nodejs](./blocking.png)
 
+Summary
+
+![image](https://github.com/user-attachments/assets/624a66b4-bc2f-47e3-9d34-746093655946)
 
 
 
