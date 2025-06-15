@@ -26,7 +26,8 @@ app.get('/users', (req, res)=>{
 app.get('/api/users', (req, res)=>{
     // res.setHeader("myName", "Ayush Kumar");
     res.setHeader("X-MyName", "Ayush Kumar"); //Custom header
-    //Always add X to custum headers
+    //Always add X to custom headers
+    //  Here X means custom header
     console.log(req.headers)
     return res.json(users);
 })
