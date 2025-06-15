@@ -7,29 +7,54 @@ const app = express();
 const PORT = 8000;
 
 //Middlewares
+
 app.use(express.urlencoded({extended:false}));
 
-app.use((req , res , next) =>{
+app.use((req,res,next)=>{
+    console.log("Hello from middleware 1"); // When any request hits the server, this logs to your terminal:
+    return res.json({msg:"Hello from Middleware 1"}); // This ends the request-response cycle by immediately sending a JSON response
+});
 
+//Because res.json(...) sends a response and you used return, the request does not go any further. It doesn't reach any other middleware or route handlers. This is called short-circuiting.
+
+// If you want it to pass on to the next handler, do not send a response here, and instead call next()
+app.use((req, res, next) => {
+  console.log("Hello from middleware 1");
+  next(); // Now it passes control to the next middleware or route
+});
+
+app.use((req, res, next) => {
+  console.log("Hello from middleware 2");
+  return res.end("Hey");
+});
+
+//  Output will be : Hey 
+// and in terminal :
+// Hello from middleware 1
+// Hello from middleware 2
+
+//  ------------------------
+
+
+app.use((req, res, next) => {
     console.log("Hello from middleware 1");
-    // return res.json({msg:"Hello from middleware 1"});
-    
-    req.myUserName= "ayush.dev";
-    fs.appendFile('log.txt', `${Date.now()} : ${req.ip}  ${req.method} : ${req.path} \n` ,(err , data)=>{
-        next();
-    })
-    
-    
-})
 
-app.use((req , res , next)=>{
-    console.log("Hello from middleware 2" , req.myUserName);
+    req.myUserName = "ayush.dev"; //This property will be accessible in all later middleware and route handlers
 
-    //return statement stops the execution
-    // return res.end("Hey");
+    fs.appendFile('log.txt', `${Date.now()} : ${req.ip}  ${req.method} : ${req.path} \n`, (err, data) => { // You're logging request details (timestamp, IP, method, path) to log.txt
+        next(); // move to the next middleware after writing to file
+    });
+});
 
+
+app.use((req, res, next) => {
+    console.log("Hello from middleware 2", req.myUserName); // O/p will be ->  Hello from middleware 2 ayush.dev
     next();
 });
+
+// ----------
+
+//  and after middleware it its then goes to routes
 
 //Routes
 app.get('/users', (req, res)=>{
