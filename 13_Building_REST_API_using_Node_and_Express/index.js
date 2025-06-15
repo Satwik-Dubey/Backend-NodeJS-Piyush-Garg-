@@ -20,6 +20,17 @@ app.get('/api/users', (req, res)=>{
     return res.json(users);
 })
 
+// Dynamic Routes
+app.get('/api/users/:id', (req, res)=>{
+    
+    const id = Number(req.params.id);
+    const user = users.find(user => user.id === id);
+    return res.json(user);
+
+});
+
+//  We can generalise routes can do it in same  like given below
+
 app.route('/api/users/:id').get((req, res)=>{
     
     const id = Number(req.params.id);
