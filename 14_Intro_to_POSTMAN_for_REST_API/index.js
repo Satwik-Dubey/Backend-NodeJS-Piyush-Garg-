@@ -68,14 +68,36 @@ data: This is always undefined in fs.writeFile, because it doesn't return any ac
 
 */
 
-fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err) => {
+import fs from 'fs';
+import users from './MOCK_DATA.json'; // assuming you’re importing existing users
+
+app.post('/api/users', (req, res) => {
+  const body = req.body;
+
+  // Add new user with unique ID
+  const newUser = { ...body, id: users.length + 1 };
+  users.push(newUser);
+
+  // Save updated user list to JSON file
+  fs.writeFile('./MOCK_DATA.json', JSON.stringify(users, null, 2), (err) => {
     if (err) {
-        console.error("Failed to write file:", err);
-        return res.status(500).json({ status: "error", message: "Failed to save user" });
+      console.error("Error writing to file:", err);
+      return res.status(500).json({
+        status: "error",
+        message: "Failed to save user"
+      });
     }
 
-    return res.json({ status: "success", id: users.length });
+    // Success response
+    return res.status(201).json({
+      status: "success",
+      id: newUser.id,
+      user: newUser
+    });
+  });
 });
+
+
 
 /*
 ✅ Summary of Correct Flow
