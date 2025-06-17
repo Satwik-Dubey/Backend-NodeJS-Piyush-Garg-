@@ -1,6 +1,8 @@
 # MongoDB
 
-No-SQL Document Based Database.
+SQL is based on table like mysql,postgress
+
+No-SQL Document Based Database. like mongodb
 
 Strong Support for Aggregation Pipes.
 
