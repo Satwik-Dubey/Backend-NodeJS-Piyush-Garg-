@@ -62,7 +62,7 @@ app.route("/api/users/:id")
 
   // ✏️ PATCH: Update part of user (here just example: lastName)
   .patch(async (req, res) => {
-    await User.findByIdAndUpdate(req.params.id, req.body); // Dynamic update
+    await User.findByIdAndUpdate(req.params.id, req.body); // Dynamic update // hard coded update be like (req.params.id,{lastName:changed});
     return res.json({ status: "Success" });
   })
 
