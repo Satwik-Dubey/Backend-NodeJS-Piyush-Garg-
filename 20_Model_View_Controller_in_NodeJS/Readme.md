@@ -9,3 +9,4 @@
 
 ```
 
+Controller manipulate model and Model updates the view 
